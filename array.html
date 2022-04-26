@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays task 1</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        body {
+            background: url('images/bg.jpg');
+        }
+
+        .box {
+            box-shadow: 0px 0px 11px 6px red;
+        }
+
+        .text {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="row">
+        <div class="col-lg-12 text-center text mt-5">
+            <h1>Login</h1>
+        </div>
+    </div>
+
+    <div class="col-lg-4 offset-lg-4 mt-5 box p-4">
+        <div class="mb-3 row">
+            <label for="Email" class="col-sm-2 col-form-label text">Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="name">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="Email" class="col-sm-2 col-form-label text">Email</label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id="emailField">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="inputPassword" class="col-sm-2 col-form-label text">Password</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="password">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="bdate" class="col-sm-2 col-form-label text">bDate</label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" id="bdate">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="gender" class="col-sm-2 col-form-label text">gender</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="gender">
+            </div>
+        </div>
+        <div class="col-lg-12 text-center ">
+            <button class="btn btn-danger  " onclick="arrayData()">Login</button>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-12 text-center mt-5">
+            <button class="btn btn-danger" onclick="shifting()">Enter Details for shifting user </button>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-lg-12 text-center mt-5">
+            <button class="btn btn-danger" onclick="sortbyemail()">sort by email </button>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-lg-12 text-center mt-5">
+            <button class="btn btn-danger" onclick="deleteElement()">delete an element of array using index  </button>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-lg-12 text-center mt-5">
+            <button class="btn btn-danger" onclick="update()">Update a specific user details</button>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-lg-12 text-center mt-5">
+            <button class="btn btn-danger" onclick="getUserByName()">Get User details by name</button>
+        </div>
+    </div>
+
+    <script>
+        var data = []; // created ARRAY gloabally
+        function arrayData() {
+            var email = document.getElementById('emailField').value;
+            var name = document.getElementById('name').value;
+            var password = document.getElementById('password').value;
+            var bdate = document.getElementById('bdate').value;
+            var gender = document.getElementById('gender').value;
+            var user = [];
+
+            user[name] = {         // created an array of objects
+                "name": name,
+                "email": email,
+                "password": password,
+                "bdate": bdate,
+                "gender": gender
+            };
+
+
+            data.push(user);
+            console.log("User data");
+            console.log(data);
+        }
+        // *************sorting by email************   
+        function sortbyemail(){
+            data.sort(compare);
+            console.log(data);
+        }
+
+        function compare(a,b){
+        return a.email-b.email;
+        }
+                // ********changing position of array Element**********
+
+        function shifting() {
+
+            var start = window.prompt("Enter index of user to be shifted");
+            var end = window.prompt("Enter index of user where u want to shift");
+            
+            temp=data[start];
+            data.splice(start,1);
+            data.splice(end,0,temp);
+               
+            console.log(data);
+            console.log(start);
+            console.log(end);
+            
+        }
+
+
+        //deletion of array element by index using splice
+        function deleteElement(){
+            var index= window.prompt("Enter index of array element You want to delete?");
+            data.splice(index,1);
+            console.log(data);
+        }
+
+        //updated the specific user details
+        function update(){
+            var index= window.prompt("Enter index of array element You want to update?");
+            var property= window.prompt("Enter property of array element You want to update ?");
+            var value= window.prompt("Enter value of array property You want to update ?");
+            data[index].property=value;
+            console.log(data);
+           
+        }
+        //fetch user data by name
+        function getUserByName(){
+            var namebyuser = window.prompt("Enter name of which u want to see info");
+            console.log(data);
+            
+           
+        }
+        
+
+    </script>
+</body>
+
+</html>
